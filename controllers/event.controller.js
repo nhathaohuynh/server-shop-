@@ -103,4 +103,22 @@ router.get(
   })
 );
 
+
+router.get(
+  "/allEventMongoose",
+  catchAsyncError(async (req, res, next) => {
+    try {
+      const events = await Event.find();
+      if (!events[0]) return next(new ErrorHandler("can not get events", 400));
+
+      res.status(201).json({
+        success: true,
+        events,
+      });
+    } catch (err) {
+      return next(new ErrorHandler(err.message, 500));
+    }
+  })
+);
+
 export default router;

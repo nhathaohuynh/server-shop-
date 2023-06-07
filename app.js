@@ -9,13 +9,19 @@ import cors from "cors";
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+app.use("/", express.static("uploads"));
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     credentials: true,
+//   })
+// );
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://client-shop-tau.vercel.app",
     credentials: true,
   })
 );
-app.use("/", express.static("uploads"));
 // config env
 
 if (process.env.NODE_ENV !== "PRODUCTION") {
@@ -35,7 +41,6 @@ app.use("/api/v1/shop", shop);
 app.use("/api/v1/product", product);
 app.use("/api/v1/event", event);
 app.use("/api/v1/coupon", coupon);
-
 
 // it's for errorHandler
 app.use(ErrorHandler);
