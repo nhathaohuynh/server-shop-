@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
   phoneNumber: {
-    type: Number,
+    type: String,
   },
   addresses: [
     {
@@ -39,6 +39,10 @@ const userSchema = new mongoose.Schema({
       },
       addressType: {
         type: String,
+      },
+      default: {
+        type: Boolean,
+        default: false,
       },
     },
   ],
